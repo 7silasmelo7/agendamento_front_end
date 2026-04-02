@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Projeto</title>
+</head>
+
+<body>
+     <!-- Cabeçalho de informações do sistema -->
+    <header>
+        <div class="title">
+            <h1>CRM CLÍNICAS</h1>
+        </div>
+        <div class="banner">
+            <img src="static\img\img1.jpeg"
+                alt="Homem praticando exercício sendo acompanhado por fisioterapeuta, e ao fundo aparelhos de 
+                fisioterapia, um texto sobreposto a imagem escrito, exercício é remédio pra artrose">
+        </div>
+    </header>
+
+     <!-- Opções para adicionar um novo item -->
+    <section class="newItem">
+        <input type="text" id="newProfissional" placeholder="Profissional">
+        <input type="text" id="newPaciente" placeholder="Paciente">
+        <input type="text" id="newService" placeholder="Serviço">
+        <input type="text" id="newPrice" placeholder="Valor">                
+        <input type="text" id="newTime" placeholder="Horário">
+        <input type="date" id="newData" placeholder="Data">
+        
+        <button onclick="newItem()" class="addBtn">Adicionar</button>
+    </section>
+    <section class="controls">
+        <button id="btnMostrar" onclick="toggleLista()">Mostrar lista</button>
+        <input type="text" id="campoBusca" placeholder="Buscar por profissional ou paciente">
+        <button onclick="buscarItem()">Buscar</button>
+    </section>
+
+<div id="listaContainer" style="display: none;">
+    <!-- Tabela com items existentes -->
+    <section class="items">
+        <table id="myTable">
+            <tr>
+                <th>Profissional</th>
+                <th>Paciente</th>
+                <th>Serviço</th>
+                <th>Valor</th>                
+                <th>Horário</th>
+                <th>Data</th>
+                
+                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+            </tr>
+        </table>
+    </section>
+</div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
