@@ -126,7 +126,17 @@ const deleteItem = (profissional, paciente) => {
   Função para adicionar um novo item  
   --------------------------------------------------------------------------------------
 */
+
+
 const newItem = async () => {
+
+  const btnAdicionar = document.querySelector(".addBtn");
+
+  // Feedback visual para o usuário, disabilitando o botão e mostrando "Aguarde..."
+
+  btnAdicionar.disabled = true;
+  btnAdicionar.textContent = "Aguarde...";
+
   let prof = document.getElementById("newProfissional").value;
   let pac = document.getElementById("newPaciente").value;
   let serv = document.getElementById("newService").value;
@@ -134,11 +144,20 @@ const newItem = async () => {
   let time = document.getElementById("newTime").value;
   let data = document.getElementById("newData").value;
 
+  
+
   if (prof === '' || pac === '' || serv === '' || price === '' || time === '' || data === '') {
     alert("Preencha todos os campos !");
-    return;
-  }
+    
   
+  
+  // Restaura o botão
+
+  btnAdicionar.disabled = false;
+  btnAdicionar.textContent = "Adicionar";
+  return;
+  }
+
   const result = await postItem(prof,pac, serv, price, time, data);
 
   if (result.ok) {
@@ -151,8 +170,16 @@ const newItem = async () => {
   else {
     alert("Erro: " + result.mensagem);
   }
+
+  // Restaura o botão após a requisição
+
+  btnAdicionar.disabled = false;
+  btnAdicionar.textContent = "Adicionar";
   
+
 }
+
+
 
 /*
   --------------------------------------------------------------------------------------
@@ -204,7 +231,7 @@ const buscarItem = () => {
   const termo = document.getElementById("campoBusca").value.trim();
 
   if(termo === "") {
-    alert("Como posso ter ajudar.");
+    alert("Por favor, insira um termo para a busca ! ");
     return;
   }
 
