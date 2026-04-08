@@ -153,6 +153,14 @@ tr:nth-child(even) {
     color: #a50e1a;
 }
 
+/* Linha de agendamentos concluídos */
+
+.passado td {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+ 
+
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
     .newItem input {

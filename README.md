@@ -29,6 +29,7 @@ O sistema permite:
  - **Fetch API**
 
  - **SPA sem frameworks**
+
 ## 📂 Estrutura do Projeto
 
 ![App Screenshot](https://i.ibb.co/cS1jrfRF/Captura-de-tela-2026-04-02-101617.png)
@@ -151,6 +152,7 @@ O front-end utiliza:
  - Botões com hover
 
  - SPA real (sem recarregar a página)
+
 ## 📸 Capturas de Tela
 
  - Tela inicial
@@ -163,7 +165,7 @@ O front-end utiliza:
  
  - Lista de agendamentos
 
- ![App Screenshot](https://i.ibb.co/sphnbkcC/Captura-de-tela-2026-04-02-111152.png)
+ ![App Screenshot](https://i.ibb.co/HLBKLTc6/Captura-de-tela-2026-04-08-083023.png)
 
  - Busca 
 

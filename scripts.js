@@ -13,7 +13,28 @@ const getList = async () => {
     .then((response) => response.json())
     .then((data) => {
       console.log("resposta do servidor:", data);
-      data.agenda.forEach(item => insertList(item.profissional, item.paciente, item.servico, item.valor, item.horario, item.data))
+
+      // Ordena por data e horário
+      data.agenda.sort((a, b) => {
+
+        // Converte as datas DD-MM-YYYY para YYYY-MM-DD
+        const [diaA, mesA, anoA] = a.data.split("-");
+        const [diaB,mesB, anoB] = b.data.split("-");
+
+        const dataA = new Date(anoA, mesA -1, diaA);
+        const dataB = new Date(anoB, mesB -1, diaB);
+
+        // Se as datas forem diferentes, ordena por data
+        if (dataA.getTime() !== dataB.getTime()) {
+          return dataA - dataB;
+        }
+
+        // Se as for o mesmo dia, ordena por horário HH:MM
+        return a.horario.localeCompare(b.horario);
+
+      });
+
+      data.agenda.forEach(item => insertList(item.profissional, item.paciente, item.servico, item.valor, item.horario, item.data));
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -196,6 +217,59 @@ const insertList = (prof, pac, serv, price, time, data) => {
     let cel = row.insertCell(i);
     cel.textContent = item[i];
   }
+
+  //--------------------------------------------------------
+  //  Tratamento de data passada
+  //--------------------------------------------------------
+
+  const agora = new Date(); // data e horas atuais
+
+  // data de hoje com as horas zeradas para comparação apenas da data
+  const hoje = new Date();
+  hoje.setHours(0,0,0,0);
+
+  // Detecta formato vindo da API
+  let ano, mes, dia;
+  const partes = data.split("-");
+
+  if (partes[0].length === 4) {
+    // Formato YYYY-MM-DD
+    [ano, mes, dia] = partes;
+
+  }else {
+    // Formato DD-MM-YYYY
+    [dia, mes, ano] = partes;
+  }
+
+  // cria data corretamente sem utc para evitar problemas de fuso horário
+  const dataAgendamento = new Date(ano, mes -1, dia);
+  dataAgendamento.setHours(0,0,0,0);
+
+  // caso 1: data anterior -> concluído
+  if (dataAgendamento < hoje) {
+    row.classList.add("passado");
+
+  }
+
+  // caso 2: data igual a de hoje -> verificar horário
+  else if (dataAgendamento.getTime() === hoje.getTime()) {
+    const [h, m] = time.split(":");
+    const horarioAgendamento = new Date();
+    horarioAgendamento.setHours(h, m, 0, 0);
+
+    if (horarioAgendamento < agora) {
+      row.classList.add("passado");
+    }
+  }
+
+
+  
+
+
+
+  
+// ------------------------------------
+
   let actionCell = row.insertCell(-1);
   insertButton(actionCell)
   document.getElementById("newProfissional").value = "";
